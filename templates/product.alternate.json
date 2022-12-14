@@ -1,0 +1,19 @@
+{
+  "layout": "theme.alternate",
+  "sections": {
+    "main-product": {
+      "type": "alternate-main-product",
+      "settings": {
+      }
+    },
+    "recommendations": {
+      "type": "alternate-product-recommendations",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "recommendations"
+  ]
+}

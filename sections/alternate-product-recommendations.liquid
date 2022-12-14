@@ -1,0 +1,263 @@
+{% schema %}
+  {
+    "name": "Recommendations",
+    "settings": [
+      {
+        "id": "title",
+        "type":"text",
+        "label":"Heading"
+      },
+      {
+        "id":"collection",
+        "type":"collection",
+        "label":"Collection"
+      },
+      {
+        "id":"limit_items",
+        "type":"range",
+        "min": 3,
+        "max": 6,
+        "step": 1,
+        "label": "Limit",
+        "default": 3
+      }
+    ],
+    "presets": [
+      {
+        "name": "Recommendations",
+         "settings": {
+           "title": "Test" 
+         }
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<section class="products">
+                <div class="container">
+                    <h2 class="products__heading">You may also like</h2>
+                    <ul class="products__list" role="list">
+                        <li class="products__item">
+                            <article class="products__card product-card">
+                                <img class="product-card__img" src="{{ 'product__item-img-1.jpg' |  asset_url }}" alt="" width="248"
+                                    height="368">
+                                <div class="product-card__info">
+                                    <h3 class="product-card__heading"><a class="link product-card__link"
+                                            href="#">Product
+                                            name</a>
+                                    </h3>
+                                    <fieldset class="product-card__fieldset">
+                                        <legend class="color__legend">Color<span aria-hidden="true">-White</span>
+                                        </legend>
+                                        <div class="radio-group">
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="0" id="small-color_0" name="color-card_1"
+                                                    class="radio__input">
+                                                <label for="small-color_0" class="radio__label" data-tooltip="Antique">
+                                                    <span class="visually-hidden">Antique Brass</span>
+                                                    <span class="color" style="background:#C88252;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="1" id="small-color_1" name="color-card_1"
+                                                    class="radio__input">
+                                                <label for="small-color_1" class="radio__label" data-tooltip="Apricot">
+                                                    <span class="visually-hidden">Apricot Peach</span>
+                                                    <span class="color" style="background:#F8CAB1;"></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="2" id="small-color_2" name="color-card_1"
+                                                    class="radio__input">
+                                                <label for="small-color_2" class="radio__label" data-tooltip="Pink">
+                                                    <span class="visually-hidden">Pink</span>
+                                                    <span class="color" style="background:#E9A0A7;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="3" id="small-color_3" name="color-card_1"
+                                                    class="radio__input">
+                                                <label for="small-color_3" class="radio__label" data-tooltip="Purple">
+                                                    <span class="visually-hidden">Purple</span>
+                                                    <span class="color" style="background:#BA9BE5;"></span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+                                    <h4 class="product-card__attribute"><abbr>CHF 40</abbr></h4>
+                                </div>
+                            </article>
+                        </li>
+                        <li class="products__item">
+                            <article class="products__card product-card">
+                                <img class="product-card__img" src="{{ 'product__item-img-2.jpg' | asset_url }}" alt="" width="248"
+                                    height="368">
+                                <div class="product-card__info">
+                                    <ul class="product-card__tags tags" role="list">
+                                        <li class="tags__item tags__item--sold-out">Sold out</li>
+                                    </ul>
+                                    <h3 class="product-card__heading"><a class="link product-card__link"
+                                            href="#">Product
+                                            name</a>
+                                    </h3>
+                                    <fieldset class="product-card__fieldset">
+                                        <legend class="color__legend">Color<span aria-hidden="true">-White</span>
+                                        </legend>
+                                        <div class="radio-group">
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="4" id="small-color_4" name="color-card_2"
+                                                    class="radio__input">
+                                                <label for="small-color_4" class="radio__label" data-tooltip="Antique">
+                                                    <span class="visually-hidden">Antique Brass</span>
+                                                    <span class="color" style="background:#C88252;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="5" id="small-color_5" name="color-card_2"
+                                                    class="radio__input">
+                                                <label for="small-color_5" class="radio__label" data-tooltip="Apricot">
+                                                    <span class="visually-hidden">Apricot Peach</span>
+                                                    <span class="color" style="background:#F8CAB1;"></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="6" id="small-color_6" name="color-card_2"
+                                                    class="radio__input">
+                                                <label for="small-color_6" class="radio__label" data-tooltip="Pink">
+                                                    <span class="visually-hidden">Pink</span>
+                                                    <span class="color" style="background:#E9A0A7;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="7" id="small-color_7" name="color-card_2"
+                                                    class="radio__input">
+                                                <label for="small-color_7" class="radio__label" data-tooltip="Purple">
+                                                    <span class="visually-hidden">Purple</span>
+                                                    <span class="color" style="background:#BA9BE5;"></span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+                                    <h4 class="product-card__attribute"><abbr>CHF 40</abbr></h4>
+                                </div>
+                            </article>
+                        </li>
+                        <li class="products__item">
+                            <article class="products__card product-card">
+                                <img class="product-card__img" src="{{ 'product__item-img-3.jpg' | asset_url }}" alt="" width="248"
+                                    height="368">
+                                <div class="product-card__info">
+                                    <h3 class="product-card__heading"><a class="link product-card__link"
+                                            href="#">Product
+                                            name</a>
+                                    </h3>
+                                    <fieldset class="product-card__fieldset">
+                                        <legend class="color__legend">Color<span aria-hidden="true">-White</span>
+                                        </legend>
+                                        <div class="radio-group">
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="8" id="small-color_8" name="color-card_3"
+                                                    class="radio__input">
+                                                <label for="small-color_8" class="radio__label" data-tooltip="Antique">
+                                                    <span class="visually-hidden">Antique Brass</span>
+                                                    <span class="color" style="background:#C88252;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="9" id="small-color_9" name="color-card_3"
+                                                    class="radio__input">
+                                                <label for="small-color_9" class="radio__label" data-tooltip="Apricot">
+                                                    <span class="visually-hidden">Apricot Peach</span>
+                                                    <span class="color" style="background:#F8CAB1;"></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="10" id="small-color_10" name="color-card_3"
+                                                    class="radio__input">
+                                                <label for="small-color_10" class="radio__label" data-tooltip="Pink">
+                                                    <span class="visually-hidden">Pink</span>
+                                                    <span class="color" style="background:#E9A0A7;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="11" id="small-color_11" name="color-card_3"
+                                                    class="radio__input">
+                                                <label for="small-color_11" class="radio__label" data-tooltip="Purple">
+                                                    <span class="visually-hidden">Purple</span>
+                                                    <span class="color" style="background:#BA9BE5;"></span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+                                    <h4 class="product-card__attribute"><abbr>CHF 40</abbr></h4>
+                                </div>
+                            </article>
+                        </li>
+                        <li class="products__item">
+                            <article class="products__card product-card">
+                                <img class="product-card__img" src='{{ 'product__item-img-4.jpg' | asset_url }}' alt="" width="248"
+                                    height="368">
+                                <div class="product-card__info">
+                                    <h3 class="product-card__heading"><a class="link product-card__link"
+                                            href="#">Product
+                                            name</a>
+                                    </h3>
+                                    <fieldset class="product-card__fieldset">
+                                        <legend class="color__legend">Color<span aria-hidden="true">-White</span>
+                                        </legend>
+                                        <div class="radio-group">
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="12" id="small-color_12" name="color-card_4"
+                                                    class="radio__input">
+                                                <label for="small-color_12" class="radio__label" data-tooltip="Antique">
+                                                    <span class="visually-hidden">Antique Brass</span>
+                                                    <span class="color" style="background:#C88252;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="13" id="small-color_13" name="color-card_4"
+                                                    class="radio__input">
+                                                <label for="small-color_13" class="radio__label" data-tooltip="Apricot">
+                                                    <span class="visually-hidden">Apricot Peach</span>
+                                                    <span class="color" style="background:#F8CAB1;"></span>
+                                                </label>
+                                            </div>
+
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="14" id="small-color_14" name="color-card_4"
+                                                    class="radio__input">
+                                                <label for="small-color_14" class="radio__label" data-tooltip="Pink">
+                                                    <span class="visually-hidden">Pink</span>
+                                                    <span class="color" style="background:#E9A0A7;"></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio radio--color radio--small">
+                                                <input type="radio" value="15" id="small-color_15" name="color-card_4"
+                                                    class="radio__input">
+                                                <label for="small-color_15" class="radio__label" data-tooltip="Purple">
+                                                    <span class="visually-hidden">Purple</span>
+                                                    <span class="color" style="background:#BA9BE5;"></span>
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+                                    <h4 class="product-card__attribute"><abbr>CHF 40</abbr></h4>
+                                </div>
+                            </article>
+                        </li>
+                    </ul>
+                </div>
+            </section>

@@ -1,0 +1,60 @@
+{% schema %}
+  {
+    "name": "alternate-header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Image"
+      },
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Main Menu"
+      },
+      {
+        "type": "link_list",
+        "id": "user_menu",
+        "label": "User Menu"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<header class="header">
+        <a href="#main" class="skip-to">Skip to content</a>
+        <div class="container">
+            <nav class="header__navigation navigation">
+                <ul class="header__main-navigation main-navigation" role="list">
+                {%- for link in section.settings.main_menu.links -%}
+                   <li class="main-navigation__item">
+                  <a class="link main-navigation__link" href={{ link.url }}>{{ link.title}}</a>
+                  </li>
+                {%- endfor -%}
+                </ul>
+                <a class="logo" href="/home">
+                    <span class="visually-hidden">Homepage</span>
+                    {{ section.settings.logo | image_url: width: 139, height: 32 | image_tag: class: "logo__img" }}
+                </a>
+                <ul class="header__user-navigation user-navigation" role="list">
+                {%- for link in section.settings.user_menu.links -%}
+                    <li class="user-navigation__item">
+                    {%- if link.title == "Cart" -%}
+                      <a class="link user-navigation__link" href={{ link.url }}>{{ link.title }}
+                        <span class="visually-hidden">
+                      </a>
+                    {%- else -%}
+                        <a class="link user-navigation__link" href={{ link.url }}>{{ link.title }}</a>
+                    {%- endif -%}
+                    </li>   
+                {%- endfor -%}
+                </ul>
+            </nav>
+        </div>
+    </header>

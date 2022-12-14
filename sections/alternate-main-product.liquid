@@ -1,0 +1,204 @@
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [],
+    "limit":1,
+    "templates": ["product"],
+    "blocks": [
+        {
+          "name":"Info",
+          "type":"accordeon",
+          "settings": [
+             {
+               "id": "heading",
+               "type":"text",
+               "label":"Heading"
+             },
+            {
+              "id": "text",
+              "type":"richtext",
+              "label":"Text"
+            }
+          ]
+        }
+    ],
+    "presets": [
+       {
+         "name": "Accordeon",
+         "blocks": [
+           {
+              "type":"accordeon"
+           }
+         ]
+         
+       }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<main id="main" class="main">
+        <div class="container">
+            <section class="product">
+                <div class="product__container container">
+                    <div class="product__info">
+                        <h1 class="product__heading">White unisex t-shirt</h1>
+                        <h2 class="product__attribute"><abbr>CHF 40</abbr></h2>
+                        <p class="product__tax"><small>Tax included</small></p>
+                        <form method="post" action="/cart">
+                            <fieldset class="product__fieldset" name="size">
+                                <legend class="size__legend">Size</legend>
+                                <div class="radio-group">
+                                    <div class="radio">
+                                        <input type="radio" value="XS" id="size-xs" name="size" class="radio__input"
+                                            aria-checked="false">
+                                        <label for="size-xs" class="radio__label">XS</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" value="S" id="size-s" name="size" class="radio__input"
+                                            checked>
+                                        <label for="size-s" class="radio__label">S</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" value="M" id="size-m" name="size" class="radio__input"
+                                            aria-checked="false">
+                                        <label for="size-m" class="radio__label">M</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" value="L" id="size-l" name="size" class="radio__input"
+                                            aria-checked="false">
+                                        <label for="size-l" class="radio__label">L</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" value="XL" id="size-xl" name="size" class="radio__input"
+                                            aria-checked="false">
+                                        <label for="size-xl" class="radio__label">XL</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" value="2XL" id="size-2xl" name="size" class="radio__input"
+                                            aria-checked="false" disabled>
+                                        <label for="size-2xl" class="radio__label">2XL</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="product__fieldset">
+                                <legend class="color__legend">Color<span aria-hidden="true">-White</span></legend>
+                                <div class="radio-group">
+                                    <div class="radio radio--color">
+                                        <input type="radio" value="white" id="color-white" name="color"
+                                            class="radio__input" checked>
+                                        <label for="color-white" class="radio__label" data-tooltip="White">
+                                            <span class="visually-hidden">White</span>
+                                            <span class="color color--bordered" style="background:white;"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio radio--color">
+                                        <input type="radio" value="black" id="color-black" name="color"
+                                            class="radio__input">
+                                        <label for="color-black" class="radio__label" data-tooltip="Black">
+                                            <span class="visually-hidden">Black</span>
+                                            <span class="color" style="background:black;"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio radio--color">
+                                        <input type="radio" value="gray" id="color-gray" name="color"
+                                            class="radio__input">
+                                        <label for="color-gray" class="radio__label" data-tooltip="Gray">
+                                            <span class="visually-hidden">Gray</span>
+                                            <span class="color" style="background:gray;"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio radio--color">
+                                        <input type="radio" value="purple" id="color-purple" name="color"
+                                            class="radio__input">
+                                        <label for="color-purple" class="radio__label" data-tooltip="Purple">
+                                            <span class="visually-hidden">Purple</span>
+                                            <span class="color" style="background:purple;"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio radio--color">
+                                        <input type="radio" value="pink" id="color-pink" name="color"
+                                            class="radio__input" disabled>
+                                        <label for="color-pink" class="radio__label" data-tooltip="Pink">
+                                            <span class="visually-hidden">Pink</span>
+                                            <span class="color" style="background:pink;"></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio radio--color">
+                                        <input type="radio" value="brown" id="color-brown" name="color"
+                                            class="radio__input" disabled>
+                                        <label for="color-brown" class="radio__label" data-tooltip="Apricot">
+                                            <span class="color" style="background:#F8CAB1;"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="product__fieldset product__fieldset--quintity">
+                                <legend class="quintity__legend"><label for="quintity">Quantity</label></legend>
+                                <div class="quintity__controls">
+                                    <input id="quintity" type="number" class="quintity__input" name="quintity"
+                                        value="1">
+                                    <button class="quintity__button quintity__button--decrease" type="button">
+                                        <span class="visually-hidden">Decrease quantity</span>
+                                    </button>
+                                    <button class="quintity__button quintity__button--increase" type="button">
+                                        <span class="visually-hidden">Increase quantity</span>
+                                    </button>
+                                </div>
+                            </fieldset>
+                            <div class="button-group">
+                                <button class="button button--primary" type="submit" name="type" value="add">Add to
+                                    cart</button>
+                                <button class="button button--secondary" type="submit" name="type" value="buy">Buy it
+                                    now</button>
+                            </div>
+                        </form>
+                        <p class="product__description">A unisex basic garment with a loose fit. Light and comfortable
+                            to your skin. </p>
+                        <p class="product__description">Certification of cotton - GOTS</p>
+                    </div>
+                   {{ product.featured_image | image_url: width: 473 | image_tag: class: "product__img" }}
+                </div>
+              <ul class="accordion__list">
+                    <li class="accordion__item">
+                        <details class="accordion__details" open>
+                            <summary class="accordion__heading">Sizing & Fit <span class="toggle"></span></summary>
+                            <p class="accordion__text">
+                                Olga is 175cm, she is wearing a size S.
+                            </p>
+                        </details>
+                    </li>
+                    <li class="accordion__item">
+                        <details class="accordion__details">
+                            <summary class="accordion__heading">Composition & Care <span class="toggle"></span>
+                            </summary>
+                            <p class="accordion__text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam totam nihil fuga eaque
+                                placeat
+                                natus sed, ea illo quia? Ab dolore deserunt quam dolorum dolorem necessitatibus
+                                similique
+                                aliquam impedit at?
+                            </p>
+                        </details>
+                    </li>
+                    <li class="accordion__item">
+                        <details class="accordion__details">
+                            <summary class="accordion__heading">Delivery & Returns <span class="toggle"></span>
+                            </summary>
+                            <p class="accordion__text">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam totam nihil fuga eaque
+                                placeat
+                                natus sed, ea illo quia? Ab dolore deserunt quam dolorum dolorem necessitatibus
+                                similique
+                                aliquam impedit at?
+                            </p>
+                        </details>
+                    </li>
+</ul>
+            </section>
+        </div>
+    </main>
