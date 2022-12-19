@@ -3,6 +3,18 @@
   "sections": {
     "main-product": {
       "type": "alternate-main-product",
+      "blocks": {
+        "a65bc31d-954f-4884-afa9-56ac23d3ce46": {
+          "type": "accordeon",
+          "settings": {
+            "heading": "Sizing & Fit",
+            "text": "<p>Olga is 175 cm<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "a65bc31d-954f-4884-afa9-56ac23d3ce46"
+      ],
       "settings": {
       }
     },
