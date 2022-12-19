@@ -247,20 +247,12 @@
               "heading_menu": "Useful Links",
               "navigation_menu": "menu-useful-links"
             }
-          },
-          "64bd6dff-40f2-46ac-83e1-9f6049ff1a53": {
-            "type": "menu",
-            "settings": {
-              "heading_menu": "test",
-              "navigation_menu": "footer-menu-1"
-            }
           }
         },
         "block_order": [
           "34ec4e61-e421-4150-a774-755f37e7d236",
           "04511aea-fd2c-40f5-a63b-c47dca1e1b04",
-          "6b99c23f-fbdf-4ac2-adcf-bf6d47505cb5",
-          "64bd6dff-40f2-46ac-83e1-9f6049ff1a53"
+          "6b99c23f-fbdf-4ac2-adcf-bf6d47505cb5"
         ],
         "settings": {
         }
