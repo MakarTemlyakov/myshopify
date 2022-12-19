@@ -24,12 +24,20 @@
             "heading": "Delivery & Returns",
             "text": "<p>Lorem Lorem<\/p>"
           }
+        },
+        "fe21df09-268d-4916-951f-9f78fc5e413d": {
+          "type": "accordeon",
+          "settings": {
+            "heading": "Test",
+            "text": "<p>Test<\/p>"
+          }
         }
       },
       "block_order": [
         "a65bc31d-954f-4884-afa9-56ac23d3ce46",
         "15698985-7e57-445d-a64c-c50790df7787",
-        "3749f7e6-75e8-4561-8cce-6f0ef1eed3bd"
+        "3749f7e6-75e8-4561-8cce-6f0ef1eed3bd",
+        "fe21df09-268d-4916-951f-9f78fc5e413d"
       ],
       "settings": {
       }
