@@ -1,3 +1,51 @@
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+{% liquid
+  assign searchRouteUrl = routes.search_url
+  assign accountRouteUrL = routes.account_url 
+  assign cartRouteUrl = routes.cart_url
+  assign searchTitle = "general.search.search" | t
+  assign accountTitle = "general.account.account" | t
+  assign cartTitle = "general.cart.cart" | t
+  assign skipToContent = "accessibility.skip_to_text" | t
+%}
+
+<header class="header">
+        <a href="#main" class="skip-to">{{ skipToContent }}</a>
+        <div class="container">
+            <nav class="header__navigation navigation">
+                <ul class="header__main-navigation main-navigation" role="list">
+                {%- for link in section.settings.main_menu.links -%}
+                  <li class="main-navigation__item">
+                    <a class="link main-navigation__link" href={{ link.url }}>{{ link.title}}</a>
+                  </li>
+                {%- endfor -%}
+                </ul>
+                <a class="logo" href="/home">
+                    <span class="visually-hidden">Homepage</span>
+                    {{ section.settings.logo | image_url: width: 139, height: 32 | image_tag: class: "logo__img" }}
+                </a>
+                <ul class="header__user-navigation user-navigation" role="list">
+                    <li class="user-navigation__item">
+                        <a class="link user-navigation__link" href={{ searchRouteUrl }}>{{ searchTitle }}</a>
+                    </li>
+                      <li class="user-navigation__item">
+                        <a class="link user-navigation__link" href={{ accountRouteUrl }}>{{ accountTitle }}</a>
+                    </li>
+                    <li class="user-navigation__item">
+                        <a class="link user-navigation__link" href={{ cartRouteUrl }}> {{ cartTitle }}
+                          <span class="visually-hidden">(<span class="counter">0</span>)</span>
+                        </a>
+                    </li>  
+                </ul>
+            </nav>
+        </div>
+</header>
+
 {% schema %}
   {
     "name": "alternate-header",
@@ -11,50 +59,7 @@
         "type": "link_list",
         "id": "main_menu",
         "label": "Main Menu"
-      },
-      {
-        "type": "link_list",
-        "id": "user_menu",
-        "label": "User Menu"
       }
     ]
   }
 {% endschema %}
-
-{% stylesheet %}
-{% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}
-
-<header class="header">
-        <a href="#main" class="skip-to">Skip to content</a>
-        <div class="container">
-            <nav class="header__navigation navigation">
-                <ul class="header__main-navigation main-navigation" role="list">
-                {%- for link in section.settings.main_menu.links -%}
-                   <li class="main-navigation__item">
-                  <a class="link main-navigation__link" href={{ link.url }}>{{ link.title}}</a>
-                  </li>
-                {%- endfor -%}
-                </ul>
-                <a class="logo" href="/home">
-                    <span class="visually-hidden">Homepage</span>
-                    {{ section.settings.logo | image_url: width: 139, height: 32 | image_tag: class: "logo__img" }}
-                </a>
-                <ul class="header__user-navigation user-navigation" role="list">
-                {%- for link in section.settings.user_menu.links -%}
-                    <li class="user-navigation__item">
-                    {%- if link.title == "Cart" -%}
-                      <a class="link user-navigation__link" href={{ link.url }}>{{ link.title }}
-                        <span class="visually-hidden">
-                      </a>
-                    {%- else -%}
-                        <a class="link user-navigation__link" href={{ link.url }}>{{ link.title }}</a>
-                    {%- endif -%}
-                    </li>   
-                {%- endfor -%}
-                </ul>
-            </nav>
-        </div>
-    </header>

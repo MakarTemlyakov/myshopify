@@ -1,9 +1,26 @@
- <nav aria-label="Breadcrumbs" class="container breadcrumbs">
-      <ol class="breadcrumbs__list" role="list">
-            <li class="breadcrumbs__item"><a class="breadcrumbs__page" href="/home">Home</a></li>
-            <li class="breadcrumbs__item"><a class="breadcrumbs__page" href="/women">Women</a></li>
-            <li class="breadcrumbs__item"><span aria-current="page"
-              class="breadcrumbs__page breadcrumbs__page--current">Whiteunisex t-shirt</span>
-            </li>
-      </ol>
+{% liquid
+  assign productCollection = product.collections | first
+  assign rootRouteUrl = routes.root_url
+  assign collectionTitle = productCollection.title
+  assign productTitle = product.title
+%}
+
+<nav aria-label="Breadcrumbs" class="container breadcrumbs">
+  <ol class="breadcrumbs__list" role="list">
+    <li class="breadcrumbs__item">
+      <a class="breadcrumbs__page" href={{ rootRouteUrl }}>Home</a>
+    </li>
+    {% if productCollection.url %}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__page" href={{ productCollection.url }}>{{ productCollection.title }}</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <span aria-current="page" class="breadcrumbs__page breadcrumbs__page--current">{{ productTitle }}</span>
+      </li>
+    {% else %}
+      <li class="breadcrumbs__item">
+        <span aria-current="page" class="breadcrumbs__page breadcrumbs__page--current">{{ productTitle }}</span>
+      </li>
+    {% endif %}
+  </ol>
 </nav>
