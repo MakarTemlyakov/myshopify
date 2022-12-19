@@ -219,8 +219,7 @@
         "type": "alternate-header",
         "settings": {
           "logo": "shopify:\/\/shop_images\/logo_ecf926e0-d8eb-479a-b28d-bfed6ad0c325.png",
-          "main_menu": "main-menu-navigation",
-          "user_menu": "user-menu"
+          "main_menu": "main-menu-navigation"
         }
       },
       "alternate-footer": {

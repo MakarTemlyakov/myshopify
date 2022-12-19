@@ -9,6 +9,9 @@
     "recommendations": {
       "type": "alternate-product-recommendations",
       "settings": {
+        "title": "You may also like",
+        "collection": "unisex",
+        "limit_items": 4
       }
     }
   },
