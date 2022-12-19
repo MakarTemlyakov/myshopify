@@ -17,11 +17,19 @@
             "heading": "Composition & Care",
             "text": "<p>Lorem Lorem<\/p>"
           }
+        },
+        "3749f7e6-75e8-4561-8cce-6f0ef1eed3bd": {
+          "type": "accordeon",
+          "settings": {
+            "heading": "Delivery & Returns",
+            "text": "<p>Lorem Lorem<\/p>"
+          }
         }
       },
       "block_order": [
         "a65bc31d-954f-4884-afa9-56ac23d3ce46",
-        "15698985-7e57-445d-a64c-c50790df7787"
+        "15698985-7e57-445d-a64c-c50790df7787",
+        "3749f7e6-75e8-4561-8cce-6f0ef1eed3bd"
       ],
       "settings": {
       }
