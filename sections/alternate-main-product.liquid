@@ -21,7 +21,17 @@
     assign accordeonBlocks = section.blocks | map: 'type' | where: 'accordeon' 
 %}
 
-<main id="main" class="main" tabindex="-1">
+
+
+<script src="https://unpkg.com/@shopify/theme-sections@4.1.1/dist/theme-sections.min.js" defer></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Shopify.theme.sections.load('*')
+    })
+</script>
+
+<main id="main" class="main" tabindex="-1"  data-section-id="{{- section.id -}}" data-section-type="alternate-main-product">
         <div class="container">
             <section class="product">
                 <div class="product__container container">
@@ -142,19 +152,20 @@
                    {{ product.featured_image | image_url: width: 473 | image_tag: class: "product__img" }}
                 </div>
               {% if accordeonBlocks.size > 0 %}
-              <ul class="accordion__list">
-              {% for block in section.blocks %}
-                <li class="accordion__item">
-                    <details class="accordion__details" open>
-                        <summary class="accordion__heading">{{block.settings.heading}}<span class="toggle"></span></summary>
-                        <div class="accordion__text">{{block.settings.text}}</div>
-                    </details>
-                </li>
-              {% endfor %}
-              </ul>
+              <ui-accordion>
+                {% for block in section.blocks %}
+                    <ui-accordion-item id="{{ block.id }}" {{- block.shopify_attributes -}}>
+                        <span slot="label">{{block.settings.heading}}</span>
+                        <div slot="content">
+                            {{block.settings.text}}
+                        </div>
+                    </ui-accordion-item>
+                {% endfor %}
+              </ui-accordion>
               {% endif %}
             </section>
         </div>
+        <script src="{{ 'alternate-main-product.js' | asset_url }}" type="module"></script>
 </main>
 
 {% schema %}
