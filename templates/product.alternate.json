@@ -3,12 +3,51 @@
   "sections": {
     "main-product": {
       "type": "alternate-main-product",
+      "blocks": {
+        "a65bc31d-954f-4884-afa9-56ac23d3ce46": {
+          "type": "accordeon",
+          "settings": {
+            "heading": "Sizing & Fit",
+            "text": "<p>Olga is 175 cm<\/p>"
+          }
+        },
+        "15698985-7e57-445d-a64c-c50790df7787": {
+          "type": "accordeon",
+          "settings": {
+            "heading": "Composition & Care",
+            "text": "<p>Lorem Lorem<\/p>"
+          }
+        },
+        "3749f7e6-75e8-4561-8cce-6f0ef1eed3bd": {
+          "type": "accordeon",
+          "settings": {
+            "heading": "Delivery & Returns",
+            "text": "<p>Lorem Lorem<\/p>"
+          }
+        },
+        "fe21df09-268d-4916-951f-9f78fc5e413d": {
+          "type": "accordeon",
+          "settings": {
+            "heading": "Test",
+            "text": "<p>Test<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "a65bc31d-954f-4884-afa9-56ac23d3ce46",
+        "15698985-7e57-445d-a64c-c50790df7787",
+        "3749f7e6-75e8-4561-8cce-6f0ef1eed3bd",
+        "fe21df09-268d-4916-951f-9f78fc5e413d"
+      ],
       "settings": {
       }
     },
     "recommendations": {
       "type": "alternate-product-recommendations",
       "settings": {
+        "title": "You may also like",
+        "collection": "unisex",
+        "limit_items": 4
       }
     }
   },
