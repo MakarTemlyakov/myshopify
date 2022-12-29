@@ -14,7 +14,15 @@
   assign skipToContent = "accessibility.skip_to_text" | t
 %}
 
-<header class="header">
+<script src="https://unpkg.com/@shopify/theme-sections@4.1.1/dist/theme-sections.min.js" defer></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        Shopify.theme.sections.load('*')
+    })
+</script>
+
+<header class="header" data-section-id="{{- section.id -}}" data-section-type="alternate-header">
         <a href="#main" class="skip-to">{{ skipToContent }}</a>
         <div class="container">
             <nav class="header__navigation navigation">
@@ -38,12 +46,13 @@
                     </li>
                     <li class="user-navigation__item">
                         <a class="link user-navigation__link" href={{ cartRouteUrl }}> {{ cartTitle }}
-                          <span class="visually-hidden">(<span class="counter">0</span>)</span>
+                          <span class="counter">({{cart.item_count}})</span>
                         </a>
                     </li>  
                 </ul>
             </nav>
         </div>
+        <script src="{{ 'alternate-header.js' | asset_url }}" type="module"></script>
 </header>
 
 {% schema %}

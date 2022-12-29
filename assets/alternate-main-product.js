@@ -225,18 +225,22 @@ window.customElements.define('ui-accordion-item', AccordionItem);
 
 Shopify.theme.sections.register('alternate-main-product', {
   customElement: null,
+  productForm: null,
+  addToCartBtn: null,
 
   // Shortcut function called when a section is loaded via 'sections.load()' or by the Theme Editor 'shopify:section:load' event.
   onLoad: function () {
     // Do something when a section instance is loaded
-    console.log('Section loaded:', this);
+    this.productForm = document.getElementById('product-form') || null;
+    this.addToCartBtn = document.getElementById('ATC-btn') || null;
     this.customElement = this.container.getElementsByTagName('ui-accrodion-item')[0] || null;
+    this.productForm.addEventListener('submit', this.onAddToCart.bind(this));
   },
 
   // Shortcut function called when a section unloaded by the Theme Editor 'shopify:section:unload' event.
   onUnload: function () {
     // Do something when a section instance is unloaded
-    console.log('Section unloaded:', this);
+    this.productForm.removeEventListener('submit', this.onAddToCart.bind(this));
   },
 
   // Shortcut function called when a section is selected by the Theme Editor 'shopify:section:select' event.
@@ -260,5 +264,31 @@ Shopify.theme.sections.register('alternate-main-product', {
   // Shortcut function called when a section block is deselected by the Theme Editor 'shopify:block:deselect' event.
   onBlockDeselect: function (event) {
     // Do something when a section block is deselected
+  },
+
+  onAddToCart: async function (event) {
+    event.preventDefault();
+    const response = await fetch(event.target.action + '.js', {
+      method: event.target.method,
+      body: new FormData(event.target),
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    });
+    const customEvent = new CustomEvent('cart:added', {
+      bubbles: true,
+      detail: {
+        header: null,
+        error: null,
+      },
+    });
+
+    try {
+      const data = await response.json();
+      customEvent.detail.header = data.sections['alternate-header'];
+      this.productForm.dispatchEvent(customEvent);
+    } catch (error) {
+      customEvent.detail.error = error;
+    }
   },
 });

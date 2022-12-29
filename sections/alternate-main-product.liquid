@@ -38,9 +38,11 @@
                     <div class="product__info">
                         <h1 class="product__heading">{{productTitle}}</h1>
                         <h2 class="product__price"><abbr>{{productPrice}}</abbr></h2>
-                        <p class="product__tax"><small>{{includeTax}}</small></p>
-                        <form method="post" action="/cart">
-                            <fieldset class="product__fieldset" name="size">
+                        <p class="product__tax"><small>{{includeTaxLabel}}</small></p>
+                       {% form 'product', product, id: 'product-form' %} 
+                         <input type="hidden" name="id" value="{{- product.selected_or_first_available_variant.id -}}">
+                         <input type="hidden" name="sections" value="alternate-header,alternate-main-product">
+                         <fieldset class="product__fieldset" name="size">
                                 <legend class="size__legend">{{sizeLabel}}</legend>
                                 <div class="radio-group">
                                     <div class="radio">
@@ -141,10 +143,10 @@
                                 </div>
                             </fieldset>
                             <div class="button-group">
-                                <button class="button button--primary" type="submit" name="type" value="add">{{addToCartLabel}}</button>
+                                <button id="ATC-btn" class="button button--primary" type="submit" name="type" value="add">{{addToCartLabel}}</button>
                                 <button class="button button--secondary" type="submit" name="type" value="buy">{{buyItNowLabel}}</button>
                             </div>
-                        </form>
+                       {% endform %}
                         <div class="product__description">
                          {{productDescription}}
                         </div>
