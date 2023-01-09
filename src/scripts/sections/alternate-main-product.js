@@ -302,6 +302,9 @@ register('alternate-main-product', {
       variant.price,
       window.formatCurrency,
     );
+    const colorOption = document.querySelector('.color-name');
+
+    colorOption.textContent = `-${variant.option2}`;
     const url = getUrlWithVariant(window.location.href, variant.id);
 
     if (!variant) {

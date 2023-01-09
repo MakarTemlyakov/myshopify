@@ -1,8 +1,8 @@
 .address {
   font-style: normal;
-}
 
-.address__info > p {
-  margin: 0 0 1rem;
-  font-family: inherit;
+  &__info > p {
+    margin: 0 0 1rem;
+    font-family: inherit;
+  }
 }

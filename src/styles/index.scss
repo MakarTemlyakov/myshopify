@@ -2,7 +2,7 @@
 @import 'sections/alternate-header';
 @import 'sections/alternate-footer';
 @import 'components/buttons/button';
-@import 'components/buttons/quintityButton';
+@import 'components/buttons/quantity-button';
 @import 'components/radio/radio';
 @import 'components/logo/logo';
 @import 'snippets/breadcrumbs';
@@ -53,6 +53,7 @@ html {
   --pallete-concrete: #f2f2f2;
   --pallete-white: #ffffff;
   --pallete-black: #000000;
+  --pallete-red: #ff0000;
 
   /* Text color */
   --text-color-1: var(--pallete-mirrage);
@@ -63,6 +64,7 @@ html {
   --text-color-6: var(--pallete-manatee);
   --text-color-7: var(--pallete-bombay);
   --text-color-8: var(--pallete-white);
+  --text-color-9: var(--pallete-red);
 
   /* Border color */
   --border-color-1: var(--pallete-silver);
@@ -97,7 +99,7 @@ body {
   margin: 0;
   line-height: 1.25;
   color: var(--text-color-1);
-  font-family: 'Avenir Next Rounded Std', 'Roboto', sans-serif;
+  font-family: 'Avenir Next Rounded Std', Roboto, sans-serif;
 }
 
 fieldset {
@@ -120,16 +122,16 @@ fieldset {
 
 .error {
   display: block;
-  color: red;
-  margin-bottom: 20px;
+  color: var(--text-color-9);
+  margin-bottom: 1.25rem;
 }
 
 .skip-to {
-  padding: 0.625rem;
-  height: auto;
-  background: var(--background-color-1);
-  left: 0;
   position: absolute;
+  left: 0;
+  height: auto;
+  padding: 0.625rem;
+  background: var(--background-color-1);
   transform: translateX(-100%);
   transition: transform 0.3s ease-out;
   color: var(--text-color-8);

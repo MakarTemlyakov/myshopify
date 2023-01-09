@@ -5,9 +5,9 @@
 }
 
 .accordion__item {
+  position: relative;
   padding: 2rem 0;
   border-top: 0.062rem solid var(--border-color-1);
-  position: relative;
 }
 
 .accordion__item:last-child {
@@ -25,23 +25,23 @@
 
 .toggle,
 .toggle::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
   display: block;
   width: 0.75rem;
   height: 0.0625rem;
-  position: absolute;
-  right: 0;
-  top: 50%;
   background: var(--background-color-2);
 }
 
 .toggle::before {
-  position: absolute;
-  display: block;
   content: '';
-  left: 0;
+  position: absolute;
+  top: 0;
   right: 0;
   bottom: 0;
-  top: 0;
+  left: 0;
+  display: block;
   margin: -0.937rem;
 }
 

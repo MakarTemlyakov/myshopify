@@ -20,13 +20,13 @@
 }
 
 .breadcrumbs__item:not(:last-child)::after {
-  display: inline-block;
   content: '';
+  display: inline-block;
   width: 0.0625rem;
   height: 0.75rem;
-  background: var(--text-color-6);
-  border-radius: 0.125rem;
   margin: 0 0.625rem;
+  border-radius: 0.125rem;
+  background: var(--text-color-6);
   transform: rotate(20deg);
 }
 
