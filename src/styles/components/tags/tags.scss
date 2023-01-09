@@ -1,0 +1,20 @@
+/* === Tags === */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tags__item {
+  margin: 0.5rem 0.75rem;
+  padding: 0.25rem 0.312rem;
+  font-size: 0.812rem;
+  text-align: center;
+}
+
+.tags__item--sold-out {
+  color: var(--text-color-7);
+  background-color: var(--background-color-3);
+}
+
+/* === /Tags === */

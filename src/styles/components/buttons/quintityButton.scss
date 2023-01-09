@@ -1,0 +1,81 @@
+/* === Quintity == */
+
+.quintity {
+  border: none;
+}
+
+.quintity__legend,
+.size__legend,
+.color__legend {
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.quintity__controls {
+  display: flex;
+}
+
+.quintity__button {
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  position: relative;
+  background: var(--background-color-3);
+  color: var(--text-color-3);
+  border: 0.062rem solid var(--border-color-1);
+  transition: all 0.3s ease-out;
+}
+
+.quintity__button::before,
+.quintity__button::after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.031rem;
+  margin-left: -0.312rem;
+  width: 0.625rem;
+  height: 0.0625rem;
+  background: currentColor;
+}
+
+.quintity__button:hover {
+  background: var(--background-color-3);
+  color: var(--text-color-3);
+  border: 0.062rem solid var(--border-color-2);
+}
+
+.quintity__input {
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0.3rem;
+  flex-grow: 1;
+  border-color: transparent;
+  border-top: 0.062rem solid var(--border-color-1);
+  border-bottom: 0.062rem solid var(--border-color-1);
+  background: var(--background-color-3);
+  color: var(--text-color-1);
+  text-align: center;
+  font-size: 1.125rem;
+  transition: all 0.3s ease-out;
+}
+
+.quintity__input:hover {
+  border-color: var(---border-color-2);
+  border-left: 0.062rem solid var(--border-color-2);
+  border-right: 0.062rem solid var(--border-color-2);
+}
+
+.quintity__input::-webkit-inner-spin-button,
+.quintity__input::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.quintity__button--decrease {
+  order: -1;
+}
+
+.quintity__button--increase::after {
+  transform: rotate(90deg);
+}

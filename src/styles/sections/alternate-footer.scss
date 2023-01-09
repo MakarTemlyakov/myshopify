@@ -1,0 +1,51 @@
+/* === Footer === */
+
+.footer {
+  padding: 5rem 0 2.062rem;
+  border-top: 0.0625rem solid var(--border-color-1);
+}
+
+.footer-navigation__label {
+  margin: 0 0 1.5rem;
+  font-size: 0.812rem;
+  text-transform: uppercase;
+  font-weight: inherit;
+}
+
+.footer-navigation__social {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-navigation__social-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.footer-navigation__social-icon path {
+  transition: fill 0.3s ease-out;
+  fill: var(--social-icon-color-1);
+}
+
+.footer-navigation__social-item:hover path {
+  fill: var(--social-icon-color-2);
+}
+
+.footer-navigation__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.937rem;
+  color: var(--text-color-2);
+}
+
+.footer-navigation__link {
+  color: var(--text-color-2);
+}
+
+.copy-right {
+  margin: 0;
+  color: var(--text-color-2);
+}
+
+/* === / Footer === */

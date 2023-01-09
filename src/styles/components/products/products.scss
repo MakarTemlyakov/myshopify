@@ -1,0 +1,25 @@
+/* === Products === */
+
+.products {
+  padding-bottom: 7.375rem;
+}
+
+.products__heading {
+  margin: 0 0 4rem;
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.375rem;
+  color: var(--heading-color-2);
+}
+
+.products__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15.5rem, 100%), 1fr));
+  grid-gap: 4rem;
+}
+
+.products__card {
+  max-width: 100%;
+}
+
+/* === / Products === */

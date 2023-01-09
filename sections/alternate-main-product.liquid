@@ -6,9 +6,11 @@
 {% javascript %}
 {% endjavascript %}
 
+
+
 {% liquid
     assign productTitle = product.title
-    assign productPrice = product.price | money_with_currency
+    assign productPrice = product.selected_or_first_available_variant.price | money_with_currency
     assign includeTaxLabel = "products.product.include_taxes" | t
     assign sizeLabel = "products.product.size.label" | t
     assign colorLabel = "products.product.color.label" | t
@@ -21,119 +23,80 @@
     assign accordeonBlocks = section.blocks | map: 'type' | where: 'accordeon' 
 %}
 
-
-
-<script src="https://unpkg.com/@shopify/theme-sections@4.1.1/dist/theme-sections.min.js" defer></script>
-
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        Shopify.theme.sections.load('*')
-    })
+    var formatCurrency = `{{shop.money_with_currency_format}}`
 </script>
 
-<main id="main" class="main" tabindex="-1"  data-section-id="{{- section.id -}}" data-section-type="alternate-main-product">
+<main 
+    id="main" 
+    class="main" tabindex="-1"  
+    data-section-id="{{- section.id -}}" 
+    data-section-type="alternate-main-product" 
+    data-handle="{{- product.handle -}}"
+    >
         <div class="container">
             <section class="product">
                 <div class="product__container container">
                     <div class="product__info">
-                        <h1 class="product__heading">{{productTitle}}</h1>
-                        <h2 class="product__price"><abbr>{{productPrice}}</abbr></h2>
-                        <p class="product__tax"><small>{{includeTaxLabel}}</small></p>
+                       <h1 class="product__heading">{{productTitle}}</h1>
+                       <h2 class="product__price"><abbr>{{productPrice}}</abbr></h2>    
+                       <p class="product__tax"><small>{{includeTaxLabel}}</small></p>
                        {% form 'product', product, id: 'product-form' %} 
                          <input type="hidden" name="id" value="{{- product.selected_or_first_available_variant.id -}}">
                          <input type="hidden" name="sections" value="alternate-header,alternate-main-product">
-                         <fieldset class="product__fieldset" name="size">
-                                <legend class="size__legend">{{sizeLabel}}</legend>
+                         {%- for product_option in product.options_with_values -%}
+                         {%- if product_option.name == "Size" -%}
+                         <fieldset class="product__fieldset product__fieldset--size">
+                                <legend class="size__legend">{{ product_option.name }}</legend>
                                 <div class="radio-group">
+                                {%- for value in product_option.values -%}
                                     <div class="radio">
-                                        <input type="radio" value="XS" id="size-xs" name="size" class="radio__input"
-                                            aria-checked="false">
-                                        <label for="size-xs" class="radio__label">XS</label>
+                                        <input 
+                                            type="radio"
+                                            name="options[{{ product_option.name | escape }}]"
+                                            id="Option-{{- value | escape -}}"  
+                                            value="{{ value | escape }}" class="radio__input"
+                                            aria-checked="false" 
+                                            {% if product_option.selected_value == value -%}
+                                                checked
+                                            {%- endif -%}>
+                                        <label for="Option-{{- value | escape -}}" class="radio__label">{{ value }}</label>
                                     </div>
-                                    <div class="radio">
-                                        <input type="radio" value="S" id="size-s" name="size" class="radio__input"
-                                            checked>
-                                        <label for="size-s" class="radio__label">S</label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" value="M" id="size-m" name="size" class="radio__input"
-                                            aria-checked="false">
-                                        <label for="size-m" class="radio__label">M</label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" value="L" id="size-l" name="size" class="radio__input"
-                                            aria-checked="false">
-                                        <label for="size-l" class="radio__label">L</label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" value="XL" id="size-xl" name="size" class="radio__input"
-                                            aria-checked="false">
-                                        <label for="size-xl" class="radio__label">XL</label>
-                                    </div>
-                                    <div class="radio">
-                                        <input type="radio" value="2XL" id="size-2xl" name="size" class="radio__input"
-                                            aria-checked="false" disabled>
-                                        <label for="size-2xl" class="radio__label">2XL</label>
-                                    </div>
+                                {%- endfor -%}
                                 </div>
-                            </fieldset>
-                            <fieldset class="product__fieldset">
-                                <legend class="color__legend">{{colorLabel}}<span aria-hidden="true">-White</span></legend>
-                                <div class="radio-group">
-                                    <div class="radio radio--color">
-                                        <input type="radio" value="white" id="color-white" name="color"
-                                            class="radio__input" checked>
-                                        <label for="color-white" class="radio__label" data-tooltip="White">
-                                            <span class="visually-hidden">White</span>
-                                            <span class="color color--bordered" style="background:white;"></span>
+                         </fieldset>
+                        {%- endif -%}
+                        {%- if product_option.name == "Color" -%}
+                        <fieldset class="product__fieldset product__fieldset--color">
+                        <legend class="color__legend">{{ product_option.name }}<span aria-hidden="true">-{{- product_option.selected_value | escape -}}</span></legend>
+                            <div class="radio-group">
+                                {%- for value in product_option.values -%}
+                                <div class="radio radio--color">
+                                    <input  
+                                        type="radio" 
+                                        id="Option-{{- value | escape -}}"  
+                                        name="options[{{ product_option.name | escape }}]"
+                                        value="{{- value | escape -}}" 
+                                        class="radio__input"
+                                        aria-checked="false" 
+                                        {% if product_option.selected_value == value -%}
+                                            checked
+                                        {%- endif -%}>
+                                        <label  for="Option-{{- value | escape -}}" class="radio__label" data-tooltip="{{- value | escape -}}">
+                                            <span class="visually-hidden">{{- value | escape -}}</span>
+                                            <span class="color color--bordered" style="background:{{-value | escape -}}"></span>
                                         </label>
-                                    </div>
-                                    <div class="radio radio--color">
-                                        <input type="radio" value="black" id="color-black" name="color"
-                                            class="radio__input">
-                                        <label for="color-black" class="radio__label" data-tooltip="Black">
-                                            <span class="visually-hidden">Black</span>
-                                            <span class="color" style="background:black;"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio radio--color">
-                                        <input type="radio" value="gray" id="color-gray" name="color"
-                                            class="radio__input">
-                                        <label for="color-gray" class="radio__label" data-tooltip="Gray">
-                                            <span class="visually-hidden">Gray</span>
-                                            <span class="color" style="background:gray;"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio radio--color">
-                                        <input type="radio" value="purple" id="color-purple" name="color"
-                                            class="radio__input">
-                                        <label for="color-purple" class="radio__label" data-tooltip="Purple">
-                                            <span class="visually-hidden">Purple</span>
-                                            <span class="color" style="background:purple;"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio radio--color">
-                                        <input type="radio" value="pink" id="color-pink" name="color"
-                                            class="radio__input" disabled>
-                                        <label for="color-pink" class="radio__label" data-tooltip="Pink">
-                                            <span class="visually-hidden">Pink</span>
-                                            <span class="color" style="background:pink;"></span>
-                                        </label>
-                                    </div>
-                                    <div class="radio radio--color">
-                                        <input type="radio" value="brown" id="color-brown" name="color"
-                                            class="radio__input" disabled>
-                                        <label for="color-brown" class="radio__label" data-tooltip="Apricot">
-                                            <span class="color" style="background:#F8CAB1;"></span>
-                                        </label>
-                                    </div>
                                 </div>
-                            </fieldset>
-                            <fieldset class="product__fieldset product__fieldset--quintity">
+                                {%- endfor -%}
+                            </div>
+                        </fieldset>
+                        {%- endif -%}
+                        {%- endfor -%}
+                        <fieldset class="product__fieldset product__fieldset--quintity">
                                 <legend class="quintity__legend"><label for="quintity">{{quantityLabel}}</label></legend>
                                 <div class="quintity__controls">
-                                    <input id="quintity" type="number" class="quintity__input" name="quintity"
-                                        value="1">
+                                    <input id="quintity" type="number" class="quintity__input" name="quantity"
+                                        value="1" min="1" max="9999">
                                     <button class="quintity__button quintity__button--decrease" type="button">
                                         <span class="visually-hidden">{{quantityDecreaseLabel}}</span>
                                     </button>
@@ -141,15 +104,16 @@
                                         <span class="visually-hidden">{{quantityIncreaseLabel}}</span>
                                     </button>
                                 </div>
-                            </fieldset>
-                            <div class="button-group">
-                                <button id="ATC-btn" class="button button--primary" type="submit" name="type" value="add">{{addToCartLabel}}</button>
-                                <button class="button button--secondary" type="submit" name="type" value="buy">{{buyItNowLabel}}</button>
-                            </div>
-                       {% endform %}
-                        <div class="product__description">
-                         {{productDescription}}
+                        </fieldset>
+                        <div class="button-group">
+                            <button id="ATC-btn" class="button button--primary" type="submit" name="type" value="add">{{addToCartLabel}}</button>
+                            <button class="button button--secondary" type="submit" name="type" value="buy">{{buyItNowLabel}}</button>
                         </div>
+                        <span class="error">{{current_variant.price}}</span>
+                    {% endform %}
+                    <div class="product__description">
+                        {{productDescription}}
+                    </div>
                     </div>
                    {{ product.featured_image | image_url: width: 473 | image_tag: class: "product__img" }}
                 </div>
@@ -167,7 +131,6 @@
               {% endif %}
             </section>
         </div>
-        <script src="{{ 'alternate-main-product.js' | asset_url }}" type="module"></script>
 </main>
 
 {% schema %}

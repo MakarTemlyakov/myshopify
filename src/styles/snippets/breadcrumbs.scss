@@ -1,0 +1,33 @@
+/* === Breadcrumbs === */
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  font-size: 0.75rem;
+  margin: 0;
+  padding: 1rem 0 0;
+}
+
+.breadcrumbs__page {
+  text-decoration: none;
+  color: inherit;
+}
+
+.breadcrumbs__page--current {
+  color: var(--text-color-6);
+}
+
+.breadcrumbs__item:not(:last-child)::after {
+  display: inline-block;
+  content: '';
+  width: 0.0625rem;
+  height: 0.75rem;
+  background: var(--text-color-6);
+  border-radius: 0.125rem;
+  margin: 0 0.625rem;
+  transform: rotate(20deg);
+}
+
+/* === / Breadcrumbs === */

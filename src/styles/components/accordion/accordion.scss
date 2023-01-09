@@ -1,0 +1,58 @@
+/* === Accordion === */
+
+.accordion__list {
+  width: 41.5rem;
+}
+
+.accordion__item {
+  padding: 2rem 0;
+  border-top: 0.062rem solid var(--border-color-1);
+  position: relative;
+}
+
+.accordion__item:last-child {
+  border-bottom: 0.062rem solid var(--border-color-1);
+}
+
+.accordion__heading::-webkit-details-marker {
+  display: none;
+}
+
+.accordion__heading {
+  list-style: none;
+  position: relative;
+}
+
+.toggle,
+.toggle::after {
+  display: block;
+  width: 0.75rem;
+  height: 0.0625rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  background: var(--background-color-2);
+}
+
+.toggle::before {
+  position: absolute;
+  display: block;
+  content: '';
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: -0.937rem;
+}
+
+.toggle::after {
+  content: '';
+  transform: rotate(90deg);
+}
+
+.accordion__details[open] .accordion__heading .toggle::after {
+  width: 0;
+  height: 0;
+}
+
+/* === / Accordion === */

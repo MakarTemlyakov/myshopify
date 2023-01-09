@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Unisex T-Shirt">
-    {{ 'index.css' | asset_url | stylesheet_tag }}
   </head>
+
+  <link rel="stylesheet" href="{{ 'theme.min.css' | asset_url }}">
+  <script src="{{ 'theme.min.js' | asset_url }}" defer></script>
 
   <body>
     {% section 'alternate-header' %}

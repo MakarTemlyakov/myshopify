@@ -1,7 +1,16 @@
+/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-constant-condition */
+/* eslint-disable no-unused-vars */
+
+import {register} from '@shopify/theme-sections';
+import {getUrlWithVariant, ProductForm} from '@shopify/theme-product-form';
+import * as currency from '@shopify/theme-currency';
+
 class Accordion extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({mode: 'open'});
     this.isAllowMultitiple = false;
     this.items = [];
   }
@@ -14,22 +23,28 @@ class Accordion extends HTMLElement {
     this.render();
     this.isAllowMultitiple = this.hasAttribute('allowMultitiple') || false;
     this.items = this.querySelectorAll('ui-accordion-item') || [];
-    this.items.forEach((item) => item.addEventListener('change-item', this.changeItems.bind(this)));
+    this.items.forEach((item) =>
+      item.addEventListener('change-item', this.checkItems.bind(this)),
+    );
   }
 
-  changeItems(e) {
+  checkItems(event) {
     const items = this.items;
-    const target = e.target;
+    const target = event.target;
     if (this.isAllowMultitiple) return;
     if (items && items.length > 0) {
       items.forEach((item) => {
         if (target !== item) {
-          item.isOpen = false;
-          item.button.setAttribute('aria-expanded', item.isOpen);
-          item.content.setAttribute('hidden', '');
+          this.changeItem(item);
         }
       });
     }
+  }
+
+  changeItem(item) {
+    item.isOpen = false;
+    item.button.setAttribute('aria-expanded', item.isOpen);
+    item.content.setAttribute('hidden', '');
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -68,8 +83,10 @@ class Accordion extends HTMLElement {
 class AccordionItem extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({mode: 'open'});
     this.isOpen = false;
+    this._btnIdCounter = 0;
+    this._contentIdCounter = 0;
   }
 
   render() {
@@ -85,7 +102,7 @@ class AccordionItem extends HTMLElement {
     ).tagName;
     this.render();
     this.button = this.shadowRoot.querySelector('button[aria-expanded]');
-    this.isOpen = this.button.getAttribute('aria-expanded') === 'true' ? true : false;
+    this.isOpen = this.button.getAttribute('aria-expanded') === 'true';
     this.button.addEventListener('click', this.onClick.bind(this));
     this.controlsId = this.button.getAttribute('aria-controls');
     this.content = this.shadowRoot.getElementById(this.controlsId);
@@ -105,7 +122,6 @@ class AccordionItem extends HTMLElement {
         this.render();
         break;
       default:
-        return;
     }
   }
 
@@ -197,8 +213,8 @@ class AccordionItem extends HTMLElement {
   }
 
   template() {
-    let buttonId = `itemId-${btnIdCounter++}`;
-    let contentId = `controlId-${contentIdCounter++}`;
+    const buttonId = `itemId-${this._btnIdCounter++}`;
+    const contentId = `controlId-${this._contentIdCounter++}`;
     return `
           <${this.headingLevel} class="accordion__heading">
             <button 
@@ -217,64 +233,95 @@ class AccordionItem extends HTMLElement {
   }
 }
 
-let btnIdCounter = 0;
-let contentIdCounter = 0;
-
 window.customElements.define('ui-accordion', Accordion);
 window.customElements.define('ui-accordion-item', AccordionItem);
 
-Shopify.theme.sections.register('alternate-main-product', {
+register('alternate-main-product', {
   customElement: null,
   productForm: null,
-  addToCartBtn: null,
+  formElement: null,
 
   // Shortcut function called when a section is loaded via 'sections.load()' or by the Theme Editor 'shopify:section:load' event.
-  onLoad: function () {
+  onLoad() {
     // Do something when a section instance is loaded
-    this.productForm = document.getElementById('product-form') || null;
-    this.addToCartBtn = document.getElementById('ATC-btn') || null;
-    this.customElement = this.container.getElementsByTagName('ui-accrodion-item')[0] || null;
-    this.productForm.addEventListener('submit', this.onAddToCart.bind(this));
+
+    this.formElement = this.container.querySelector('#product-form');
+    const productHandle = this.container.dataset.handle;
+
+    this.customElement =
+      this.container.getElementsByTagName('ui-accrodion-item')[0];
+
+    fetch(`/products/${productHandle}.js`)
+      .then((response) => response.json())
+      .then((productJSON) => {
+        this.productForm = new ProductForm(this.formElement, productJSON, {
+          onOptionChange: this.onOptionChange,
+          onFormSubmit: this.onFormSubmit,
+          onQuantityChange: this.onQuantityChange,
+        });
+      })
+
+      .catch((error) => new Error({message: 'sad'}));
   },
 
   // Shortcut function called when a section unloaded by the Theme Editor 'shopify:section:unload' event.
-  onUnload: function () {
+  onUnload() {
     // Do something when a section instance is unloaded
-    this.productForm.removeEventListener('submit', this.onAddToCart.bind(this));
+    if (!this.productForm) return;
+    this.productForm.destroy();
   },
 
   // Shortcut function called when a section is selected by the Theme Editor 'shopify:section:select' event.
-  onSelect: function () {
+  onSelect() {
     // Do something when a section instance is selected
     if (!this.customElement) return;
     this.customElement.open();
   },
 
   // Shortcut function called when a section is deselected by the Theme Editor 'shopify:section:deselect' event.
-  onDeselect: function () {
+  onDeselect() {
     // Do something when a section instance is deselected
     this.customElement.close();
   },
 
   // Shortcut function called when a section block is selected by the Theme Editor 'shopify:block:select' event.
-  onBlockSelect: function (event) {
+  onBlockSelect(event) {
     // Do something when a section block is selected
   },
 
   // Shortcut function called when a section block is deselected by the Theme Editor 'shopify:block:deselect' event.
-  onBlockDeselect: function (event) {
+  onBlockDeselect(event) {
     // Do something when a section block is deselected
   },
 
-  onAddToCart: async function (event) {
+  onOptionChange(event) {
+    const variant = event.dataset.variant;
+    const btn = document.querySelector('#ATC-btn');
+    const price = document.querySelector('.product__price');
+    const formatedPrice = currency.formatMoney(
+      variant.price,
+      window.formatCurrency,
+    );
+    const url = getUrlWithVariant(window.location.href, variant.id);
+
+    if (!variant) {
+      btn.setAttribute('disabled', '');
+      btn.value = btn.dataset.unavailable;
+    } else if (variant && !variant.available) {
+      btn.setAttribute('disabled', '');
+      btn.value = btn.dataset.outOfStock;
+    } else if (variant && variant.available) {
+      btn.removeAttribute('disabled');
+      btn.value = btn.dataset.atc;
+    }
+
+    price.textContent = formatedPrice;
+    window.history.replaceState({path: url}, '', url);
+  },
+  async onFormSubmit(event) {
     event.preventDefault();
-    const response = await fetch(event.target.action + '.js', {
-      method: event.target.method,
-      body: new FormData(event.target),
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    });
+    let errorDescription;
+    const form = document.getElementById('product-form');
     const customEvent = new CustomEvent('cart:added', {
       bubbles: true,
       detail: {
@@ -282,13 +329,25 @@ Shopify.theme.sections.register('alternate-main-product', {
         error: null,
       },
     });
-
     try {
+      const response = await fetch(`${event.target.action}.js`, {
+        method: event.target.method,
+        body: new FormData(event.target),
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+      });
       const data = await response.json();
+      errorDescription = data.description;
       customEvent.detail.header = data.sections['alternate-header'];
-      this.productForm.dispatchEvent(customEvent);
     } catch (error) {
-      customEvent.detail.error = error;
+      customEvent.detail.error = errorDescription;
+    } finally {
+      form.dispatchEvent(customEvent);
     }
+  },
+
+  onQuantityChange(event) {
+    console.log('event:', event.dataset.quantity);
   },
 });

@@ -1,0 +1,28 @@
+/* === Header === */
+.header {
+  border-bottom: 0.0625rem solid var(--border-color-1);
+}
+
+.header .header__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .header__main-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.main-navigation .main-navigation__item,
+.user-navigation .user-navigation__item {
+  padding: 2.062rem 0.5rem;
+}
+
+.header .header__user-navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* === / Header === */

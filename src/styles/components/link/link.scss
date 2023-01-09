@@ -1,0 +1,10 @@
+.link {
+  text-decoration: none;
+  color: var(--link-color-2);
+  transition: all 0.3s ease-out;
+}
+
+.link:hover,
+.link:active {
+  color: var(--link-color-1);
+}
